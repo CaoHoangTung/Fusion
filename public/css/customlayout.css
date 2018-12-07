@@ -1,0 +1,89 @@
+.nav-item{
+    padding-right: 5px;
+    padding-left: 5px;
+    border-bottom: 1px solid #3C75AF;
+    opacity: 0.9;
+    z-index:10;
+    transition: 0.5s;
+}
+.nav-item:hover{
+    background-color: #83A7CE;
+}
+
+.nav-link{
+    text-align: center;
+    font-size: 17px;
+    font-weight: 550;
+    line-height: 1;
+    font-family: "Helvetica" ;
+    color: #3C75AF !important;
+}
+
+.searchbox{
+    height: 20px !important;
+}
+
+.card{
+    margin-bottom: 10px;
+}
+
+.card-title{
+    background-color: #3C75AF;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+}
+
+.card-upcomingcontest{
+    text-align:center; 
+    width:100%
+}
+
+.card-profile{
+    text-align: center;
+}
+
+.card-topusers{
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+}
+
+.post{
+    margin-bottom: 30px;
+    border-bottom: 1px solid #B9B9B9
+}
+
+.post-header{
+    margin-bottom: 5px;
+}
+
+.post-subheader{
+    margin-bottom: 15px;
+}
+
+.post-content{
+    border-left: 5px solid #B9B9B9;
+    padding-left: 15px;
+}
+
+.avatar img{
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.dropdown-item{
+    z-index: 1000;
+}
+
+.hidden-form{
+    display: none;
+}
+
+.card-problem img{
+    width: 100%;
+}
+
+.problem-done{
+    background: #D7F3E3 !important;
+}

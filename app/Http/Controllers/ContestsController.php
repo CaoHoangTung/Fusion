@@ -61,22 +61,31 @@ class ContestsController extends Controller{
         $contest = DB::table('contests')->where('ContestID','=',$ContestID)->get()->first();
         $arr['contest'] = $contest;
 
-        $UID = isset(Auth::user()->id) ? Auth::user()->id : null;
+        $now = date('Y-m-d H:i:s');
+        if ($now < $contest->ContestBegin){
+            $arr['ContestBegin'] = $contest->ContestBegin;
+            $arr['TimeLeft'] = strtotime($contest->ContestBegin)-strtotime($now);
+            // return $now." <br>".$contest->ContestBegin." <Br>".$arr['TimeLeft'];
+            return view('contestnotopen',$arr);
+        }
+        else{
+            $UID = isset(Auth::user()->id) ? Auth::user()->id : null;
 
-        $userStatus = self::getUserCorrect($ContestID);
-// return $userStatus;
-        $problems = DB::table('problems')->where([['problems.ContestID','=',$ContestID]])->get();
-        foreach($problems as $key=>$problem){
-            foreach($userStatus as $key=>$status){
-                if ($status->ProblemID === $problem->ProblemID){
-                    $problem->status = 1;
+            $userStatus = self::getUserCorrect($ContestID);
+
+            $problems = DB::table('problems')->where([['problems.ContestID','=',$ContestID]])->get();
+            foreach($problems as $key=>$problem){
+                foreach($userStatus as $key=>$status){
+                    if ($status->ProblemID === $problem->ProblemID){
+                        $problem->status = 1;
+                    }
                 }
             }
-        }
-        
-        $arr['problems'] = $problems;
+            
+            $arr['problems'] = $problems;
 
-        return view('viewcontest',$arr);
+            return view('viewcontest',$arr);
+        }
     }
 
     public function viewProblem($ContestID = null,$ProblemID){
@@ -86,16 +95,38 @@ class ContestsController extends Controller{
         $user = HomeController::getuserprofile();
         $arr['profile'] = $user[0];
 
-        $problem = DB::table('problems')->where('ProblemID','=',$ProblemID)->get()->first();
-        $arr['problem'] = $problem;
-
         $contest = DB::table('contests')->where('ContestID','=',$ContestID)->get()->first();
         $arr['contest'] = $contest;
 
-        if ($problem==null || $contest==null)
-            return redirect('/404');
+        $now = Date('Y-m-d H:i:s');
+        if ($now < $contest->ContestBegin){
+            $arr['ContestBegin'] = $contest->ContestBegin;
+            $arr['TimeLeft'] = Date($contest->ContestBegin)-Date($now);
+            return view('contestnotopen',$arr);
+        }
+        else{
+            $problem = DB::table('problems')->where('ProblemID','=',$ProblemID)->get()->first();
+            $arr['problem'] = $problem;
 
-        return view('viewproblem',$arr);
+            if ($problem==null || $contest==null)
+                return redirect('/404');
+
+            return view('viewproblem',$arr);
+        }
+    }
+
+    static private function contestHasNotOpen($ContestID){
+        $now = date('Y-m-d H:i:s');
+        $contest = DB::table('contests')->where('ContestID',$ContestID)->get()->first();
+        $Begin = $contest->ContestBegin;
+        return $now < $Begin;
+    }
+
+    static private function contestIsOver($ContestID){
+        $now = date('Y-m-d H:i:s');
+        $contest = DB::table('contests')->where('ContestID',$ContestID)->get()->first();
+        $End = $contest->ContestEnd;
+        return $now > $End;
     }
 
     public function submit(Request $req, $ContestID = null , $ProblemID){
@@ -104,13 +135,18 @@ class ContestsController extends Controller{
 
         $UserAnswer = $req->Answer;
         $Problem = DB::table('problems')->where('ProblemID','=',$ProblemID)->get()->first();
-        if ($Problem->StartAt)
+
         if ($ContestID == null){
             $ContestID = $Problem->ContestID;
         }
+
+        if (self::contestHasNotOpen($ContestID))
+            return redirect()->back();
         
         $correct = $UserAnswer === $Problem->Answer;
-        DB::table('submissions')->insert(['UID'=>Auth::user()->id,'ContestID'=>$ContestID,'ProblemID'=>$ProblemID,'Output'=>$UserAnswer,'Status'=>$correct]);
+        $due = self::contestIsOver($ContestID);
+
+        DB::table('submissions')->insert(['UID'=>Auth::user()->id,'ContestID'=>$ContestID,'ProblemID'=>$ProblemID,'Output'=>$UserAnswer,'Status'=>$correct,'Judged'=>$due]);
         $subCount = DB::table('submissions')->where([['UID',Auth::user()->id],['ProblemID',$ProblemID]])->count();
 
         if ($correct)

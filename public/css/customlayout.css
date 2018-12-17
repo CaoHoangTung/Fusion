@@ -1,4 +1,4 @@
-.nav-item{
+.main-menu .nav-item{
     padding-right: 5px;
     padding-left: 5px;
     border-bottom: 1px solid #3C75AF;
@@ -6,7 +6,7 @@
     z-index:10;
     transition: 0.5s;
 }
-.nav-item:hover{
+.main-menu .nav-item:hover{
     background-color: #83A7CE;
 }
 
@@ -86,4 +86,40 @@
 
 .problem-done{
     background: #D7F3E3 !important;
+}
+
+/* PROFILE */
+
+.user-avatar{
+    width:100%;
+    height: 100%;
+}
+
+.settings-menu{
+    padding-top: 30px;
+}
+
+.settings-menu-option{
+    font-size: 18px;
+    
+}
+
+/* END PROFILE */
+
+
+/* TABS */
+
+/* END TABS */
+
+.prize-icon{
+    width: 18px;
+    height: 18px;
+}
+
+.card-user-info{
+    display: inline-block !important
+}
+
+.card-user-info .card-header{
+    font-weight: bold
 }

@@ -23,6 +23,16 @@ Route::get('/contests/{contestid}/{problemid}','ContestsController@viewProblem')
 Route::post('/submit/{contestid}/{problemid}','ContestsController@submit');
 Route::post('/judge','RatingController@rateContest');
 
+Route::get('/profile','ProfileController@index');
+Route::get('/profile/{UserID}','ProfileController@viewProfile');
+Route::post('/profile/change/avatar','ProfileController@changeAvatar');
+
+Route::get('/blog/entry/{postid}','PostController@viewPost');
+
+Route::get('/ranking','RankingController@index');
+
+Route::get('search','SearchController@query');
+
 Route::get('/admin/dashboard','AdminController@index');
 Route::get('/admin/dashboard/contest/new','AdminController@newcontest');
 Route::get('/admin/dashboard/contest/past','AdminController@pastcontest');

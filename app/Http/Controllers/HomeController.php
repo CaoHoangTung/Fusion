@@ -25,12 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = self::getuserprofile()[0];
-        if (!isset($user->Avatar) || $user->Avatar == null)
-            $user->Avatar = "/images/avatar.png";
-
         $arr = array();
-        $arr['profile'] = $user[0];
+
+        $user = self::getuserprofile()[0];
+        if (isset($user->Avatar)){
+            if ($user->Avatar == null)
+                $user->Avatar = "/images/avatar.png";
+
+            $arr['profile'] = $user;
+        }
         return view('home',$arr);
     }
 

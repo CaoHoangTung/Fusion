@@ -19,7 +19,8 @@ class SearchController extends Controller{
         $user = HomeController::getuserprofile()[0];
         $arr['profile'] = $user;
 
-        $q = $req->query('query');
+        $q = (string)$req->query('query');
+
         $arr['query'] = $q;
         
         if (!isset($req->contest) && !isset($req->problem) && !isset($req->post) && !isset($req->user)){
@@ -39,11 +40,13 @@ class SearchController extends Controller{
         }
 
         if (isset($req->problem) && $req->problem == 'on'){
+            $now = Date('Y-m-d H:i:s');
             $settings['problem'] = 1;
+ 
             $arr['problems'] = DB::table('problems')
                             ->join('contests','contests.ContestID','=','problems.ContestID')
-                            ->where('ProblemID','like',$q.'%')
-                            ->orWhere('QuestionName','like',$q.'%')
+                            ->where([['ProblemID','like',$q.'%'],['contests.ContestBegin','<',$now]])
+                            ->orWhere([['QuestionName','like',$q.'%'],['contests.ContestBegin','<',$now]])
                             ->get();
         }
 

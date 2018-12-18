@@ -12,7 +12,7 @@
 */
 Auth::routes();
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -29,9 +29,11 @@ Route::post('/profile/change/avatar','ProfileController@changeAvatar');
 
 Route::get('/blog/entry/{postid}','PostController@viewPost');
 
+Route::get('/learn/archive','LearnController@archived');
+
 Route::get('/ranking','RankingController@index');
 
-Route::get('search','SearchController@query');
+Route::get('/search','SearchController@query');
 
 Route::get('/admin/dashboard','AdminController@index');
 Route::get('/admin/dashboard/contest/new','AdminController@newcontest');

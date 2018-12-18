@@ -7,7 +7,7 @@
 <div class="input-group mb-3 searchbox">
     <form method="get" action="/search">
         <div class="input-group mb-3">
-            <input class='form-control' value={{$query}} type="text" name="query" placeholder="Search" class="form-control">
+            <input class='form-control' value="{{$query}}" type="text" name="query" placeholder="Search" class="form-control">
             <button type='submit' class='btn btn-primary'>Search</button><br>
             <div class="switch-button switch-button-xs" style="width:100%">
                 <input type="checkbox" @if(isset($settings['contest']) && $settings['contest'] == 1) checked @endif name="contest" id="checkcontest">

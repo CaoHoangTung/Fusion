@@ -115,11 +115,11 @@
         var context = canvas.getContext("2d");
 
         $('#uploadimg').ready(function(){    
-            context.scale(width/newimg.width,height/newimg.height);
+            // context.scale(width,1);
             context.drawImage(newimg, 0, 0);             
             var newBase64 = canvas.toDataURL();
-            $('#testimg').attr('src',newBase64); 
-            $('#testimg').removeAttr('hidden');
+            // $('#testimg').attr('src',newBase64); 
+            // $('#testimg').removeAttr('hidden');
             console.log(canvas.toDataURL());
             return canvas.toDataURL();    
         });

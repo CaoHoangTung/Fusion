@@ -44,18 +44,95 @@ function secondsToHIS(seconds){
 }
 
 function getUpcomingContests(){
+    var x = [null,null];
+    var Ind = [null,null];
     $.ajax({
         url: '/api/home/nextcontests',
         method: 'get',
         success: function(res){
             var contests = JSON.parse(res);
+            var contest0 = contests[0];
+            var contest1 = contests[1];
             var str = "";
-            for (var index in contests){
-                var contest = contests[index];
-                str += "<a href='/contests/"+contest.ContestID+"' >"+contest.ContestName+"</a><br>";
-                str += "<span>"+contest.ContestBegin+"<br>"+contest.ContestEnd+"</span><br><br>";
-            }
+            str += "<a href='/contests/"+contest0.ContestID+"' >"+contest0.ContestName+"</a><br>";
+            str += "<span id='timer"+0+"'></span><br><br>";
+            str += "<input type='hidden' id='tinput"+0+"' value='"+contest0.TimeLeft+"'>";
+            str += "<a href='/contests/"+contest1.ContestID+"' >"+contest1.ContestName+"</a><br>";
+            str += "<span id='timer"+1+"'></span><br><br>";
+            str += "<input type='hidden' id='tinput"+1+"' value='"+contest1.TimeLeft+"'>";
+            
+                var distance0 = contest0.TimeLeft*1000;
+                var x0 = setInterval(function() {    
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance0 / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance0 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance0 % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance0 % (1000 * 60)) / 1000);
+                    
+                    // Output the result in an element with id="timer"
+                    document.getElementById("timer0").innerHTML = days + "d " + hours + "h "
+                    + minutes + "m " + seconds + "s ";
+                    distance0 -= 1000;
+                    // If the count down is over, write some text 
+                    if (distance0 <= 0) {
+                        clearInterval(x0);
+                        document.getElementById("timer0").innerHTML = "The contest has begun";
+                    }
+                }, 1000);
+
+                var distance1 = contest1.TimeLeft*1000;
+                var x1 = setInterval(function() {    
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance1 / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance1 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance1 % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance1 % (1000 * 60)) / 1000);
+                    
+                    // Output the result in an element with id="timer"
+                    document.getElementById("timer1").innerHTML = days + "d " + hours + "h "
+                    + minutes + "m " + seconds + "s ";
+                    distance1 -= 1000;
+                    // If the count down is over, write some text 
+                    if (distance1 <= 0) {
+                        clearInterval(x1);
+                        document.getElementById("timer1").innerHTML = "The contest has begun";
+                    }
+                }, 1000);
+            // for (var index in contests){
+            //     var contest = contests[index];
+            //     str += "<a href='/contests/"+contest.ContestID+"' >"+contest.ContestName+"</a><br>";
+            //     str += "<span>"+contest.ContestBegin+"<br>"+contest.ContestEnd+"</span><br><br>";
+            //     str += "<span id='timer"+index+"'>"+contest.TimeLeft+"</span><br><br>";
+            //     str += "<input type='hidden' id='tinput"+index+"' value='"+contest.TimeLeft+"'>";
+
+            //     var distance = contest.TimeLeft*1000;
+            //     alert("SET INTERVAL "+index);
+            //     x[index] = setInterval(function() {    
+            //         // Find the distance between now and the count down date
+                    
+                    
+            //         // Time calculations for days, hours, minutes and seconds
+            //         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            //         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            //         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            //         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+            //         // Output the result in an element with id="timer"
+            //         document.getElementById("timer"+index).innerHTML = days + "d " + hours + "h "
+            //         + minutes + "m " + seconds + "s ";
+            //         distance -= 1000;
+            //         // If the count down is over, write some text 
+            //         if (distance <= 0) {
+            //             clearInterval(x[index]);
+            //             document.getElementById("timer"+index).innerHTML = "The contest has begun";
+            //         }
+            //         // console.log(index);
+            //     }, 1000);
+            // }
             $('.card-upcomingcontest').html(str);
+            
         },
         error: function(res){
             // $('.card-upcomingcontest').html("");

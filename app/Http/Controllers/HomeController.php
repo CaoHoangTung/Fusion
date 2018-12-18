@@ -41,6 +41,9 @@ class HomeController extends Controller
         $take = 2;
         $now = date('Y-m-d H:i:s');
         $contests = DB::table('contests')->where([['ContestEnd','>',$now]])->take($take)->get()->toArray();
+        foreach($contests as $key=>$contest){
+            $contest->TimeLeft = strtotime($contest->ContestBegin) - strtotime($now);
+        }
         return json_encode($contests);
     }
 

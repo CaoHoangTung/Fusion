@@ -5,7 +5,7 @@
     <div class="container-fluid dashboard-content">
         <div class="row">
             <div class="form-group col-md-12">
-                <form method="post" action="/admin/dashboard/announcement/new">
+                <form method="post" action="/sadmin/dashboard/announcement/new">
                     @csrf
                     @if(session()->has('success'))
                         <div class="alert alert-success">

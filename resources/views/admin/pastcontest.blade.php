@@ -10,8 +10,8 @@
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="/admin/dashboard" class="breadcrumb-link">Dashboard</a></li>
-                                            <li class="breadcrumb-item"><a href="/admin/dashboard/contest/past" class="breadcrumb-link">Contest</a></li>
+                                            <li class="breadcrumb-item"><a href="/sadmin/dashboard" class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="/sadmin/dashboard/contest/past" class="breadcrumb-link">Contest</a></li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -63,8 +63,8 @@
                                                     <td>{{$contest->ContestBegin}}</td>
                                                     <td>{{$contest->ContestEnd}}</td>
                                                     <td>                                                        
-                                                        <a title="Detail" href="/admin/dashboard/contest/{{$contest->ContestID}}/detail"><i style="color: green" class="m-r-10 mdi mdi-book"></i></a>
-                                                        <a title="Delete" onclick="return confirm('Do you really want to delete the contest?');" href="/admin/dashboard/contest/{{$contest->ContestID}}/delete"><i style="color:red" class="m-r-10 mdi mdi-delete-forever"></i></a>
+                                                        <a title="Detail" href="/sadmin/dashboard/contest/{{$contest->ContestID}}/detail"><i style="color: green" class="m-r-10 mdi mdi-book"></i></a>
+                                                        <a title="Delete" onclick="return confirm('Do you really want to delete the contest?');" href="/sadmin/dashboard/contest/{{$contest->ContestID}}/delete"><i style="color:red" class="m-r-10 mdi mdi-delete-forever"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

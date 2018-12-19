@@ -54,9 +54,9 @@
                                                     <td>{{$contest->ContestBegin}}</td>
                                                     <td>{{$contest->ContestEnd}}</td>
                                                     <td>                                                        
-                                                        <a title="Detail" href="/admin/dashboard/contest/{{$contest->ContestID}}/detail"><i style="color: green" class="m-r-10 mdi mdi-book"></i></a>
-                                                        <a title="Add Problem" href="/admin/dashboard/contest/{{$contest->ContestID}}/newproblem"><i style="color:blue" class="m-r-10 mdi mdi-book-open-page-variant"></i></a>
-                                                        <a title="Delete" onclick="return confirm('Do you really want to delete the contest?');" href="/admin/dashboard/contest/{{$contest->ContestID}}/delete"><i style="color:red" class="m-r-10 mdi mdi-delete-forever"></i></a>
+                                                        <a title="Detail" href="/sadmin/dashboard/contest/{{$contest->ContestID}}/detail"><i style="color: green" class="m-r-10 mdi mdi-book"></i></a>
+                                                        <a title="Add Problem" href="/sadmin/dashboard/contest/{{$contest->ContestID}}/newproblem"><i style="color:blue" class="m-r-10 mdi mdi-book-open-page-variant"></i></a>
+                                                        <a title="Delete" onclick="return confirm('Do you really want to delete the contest?');" href="/sadmin/dashboard/contest/{{$contest->ContestID}}/delete"><i style="color:red" class="m-r-10 mdi mdi-delete-forever"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

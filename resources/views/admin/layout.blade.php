@@ -92,10 +92,10 @@
                                 <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/dashboard/contest/new">New Contest</a>
+                                            <a class="nav-link" href="/sadmin/dashboard/contest/new">New Contest</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/dashboard/contest/past">Past Contests</a>
+                                            <a class="nav-link" href="/sadmin/dashboard/contest/past">Past Contests</a>
                                         </li>                                       
                                     </ul>
                                 </div>
@@ -106,13 +106,13 @@
                                 <div id="submenu-3" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/dashboard/blog">Blogs</a>
+                                            <a class="nav-link" href="/sadmin/dashboard/blog">Blogs</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/dashboard/announcement">Announcements</a>
+                                            <a class="nav-link" href="/sadmin/dashboard/announcement">Announcements</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/admin/dashboard/lecture">Lectures</a>
+                                            <a class="nav-link" href="/sadmin/dashboard/lecture">Lectures</a>
                                         </li>                                       
                                     </ul>
                                 </div>

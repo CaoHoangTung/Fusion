@@ -16,7 +16,7 @@
                                 <div class="card">
                                     <h5 class="card-header">Contest ID: <b>{{$newid}}</h5>
                                     <div class="card-body">
-                                        <form method="post" href="/admin/dashboard/contest/new">
+                                        <form method="post" href="/sadmin/dashboard/contest/new">
                                             @csrf
                                             @if(session()->has('success'))
                                                 <div class="alert alert-success">

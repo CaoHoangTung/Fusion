@@ -95,7 +95,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if (Auth::user()->Role === 'admin')
-                                    <a class="dropdown-item" href="/admin/dashboard">
+                                    <a class="dropdown-item" href="/sadmin/dashboard">
                                         Admin dashboard
                                     </a>
                                     @endif

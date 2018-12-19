@@ -10,8 +10,8 @@
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="/admin/dashboard" class="breadcrumb-link">Dashboard</a></li>
-                                            <li class="breadcrumb-item"><a href="/admin/dashboard/contest/past" class="breadcrumb-link">Contest</a></li>
+                                            <li class="breadcrumb-item"><a href="/sadmin/dashboard" class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="/sadmin/dashboard/contest/past" class="breadcrumb-link">Contest</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">{{$ContestID}}</li>
                                         </ol>
                                     </nav>
@@ -69,7 +69,7 @@
                                                     <td class="answer">{{$problem->Answer}}</td>
                                                     <td>                                                        
                                                         <a title="Change" id="{{$problem->ProblemID}}" class="change-problem" href="#hidden-form"><i style="color: green" class="m-r-10 mdi mdi-pen"></i></a>
-                                                        <a title="Delete" onclick="return confirm('Do you really want to delete the problem?');" href="/admin/dashboard/problem/{{$problem->ProblemID}}/delete"><i style="color:red" class="m-r-10 mdi mdi-delete-forever"></i></a>
+                                                        <a title="Delete" onclick="return confirm('Do you really want to delete the problem?');" href="/sadmin/dashboard/problem/{{$problem->ProblemID}}/delete"><i style="color:red" class="m-r-10 mdi mdi-delete-forever"></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -115,7 +115,7 @@
 
     var getProblem = function(id){
         return $.ajax({
-            url: '/admin/dashboard/problem/'+id,
+            url: '/sadmin/dashboard/problem/'+id,
             method: 'get',
             success: function(res){
                 json = JSON.parse(res);
@@ -144,7 +144,7 @@
         })
     });
     $('#new-problem').click(function(){
-        str = '<form method="post" action="/admin/dashboard/problem/new">'
+        str = '<form method="post" action="/sadmin/dashboard/problem/new">'
                 + '     @csrf'
                 + '     <input name="ContestID" value="{{$ContestID}}" type="hidden">'
                 + '     <label>Question Name</label>'
@@ -167,7 +167,7 @@
         $('#hidden-form').html("Loading");
         
         $.when(getProblem(this.id)).done(function(){
-            str = '<form method="post" action="/admin/dashboard/problem/'+json.ProblemID+'/change">'
+            str = '<form method="post" action="/sadmin/dashboard/problem/'+json.ProblemID+'/change">'
                 + '     @csrf'
                 + '     <input name="ContestID" value="'+json.ContestID+'" type="hidden">'
                 + '     <label>Question Name</label>'

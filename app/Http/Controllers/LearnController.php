@@ -17,12 +17,17 @@ class LearnController extends Controller{
         
     }
 
-    public function learn(){
-
-    }
-
     public function lectures(){
+        $arr = array();
+        $arr['profile'] = HomeController::getuserprofile()[0];
 
+        $lectures = DB::table('posts')
+                    ->where('Type','lecture')
+                    ->join('users','users.id','=','posts.Creator')
+                    ->Paginate();
+        $arr['lectures'] = $lectures;
+
+        return view('lectures',$arr);
     }
 
     public function archived(){

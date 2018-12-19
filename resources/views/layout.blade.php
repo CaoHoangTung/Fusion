@@ -55,9 +55,6 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/learn">
-                                        Learn
-                                    </a>
                                     <a class="dropdown-item" href="/learn/lectures">
                                         Lectures
                                     </a>
@@ -75,7 +72,7 @@
                             <span style="margin-right:5vw"></span>
                             <li>
                                 <div class="input-group mb-3 searchbox">
-                                    <form method="get" action="/search">
+                                    <form method="get" action="/search" style="width:100%">
                                         <input type="text" class="form-control" name="query" placeholder="Search">
                                     </form>
                                 </div>

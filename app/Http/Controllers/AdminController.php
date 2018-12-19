@@ -116,4 +116,12 @@ class AdminController extends Controller{
     public function announcement(){
         return view('admin.announcement');
     }
+
+    public function blog(){
+        return view('admin.blog');
+    }
+
+    public function lecture(){
+        return view('admin.lecture');
+    }
 }

@@ -1,3 +1,14 @@
+
+@media(max-width: 767px){
+    .navbar-nav.main-menu{
+        position: absolute;
+        left: 0;
+        width: 100%;
+        background: white;
+        z-index: 1;
+    }
+}
+
 .main-menu .nav-item{
     padding-right: 5px;
     padding-left: 5px;
@@ -6,6 +17,7 @@
     z-index:10;
     transition: 0.5s;
 }
+
 .main-menu .nav-item:hover{
     background-color: #83A7CE;
 }
@@ -65,6 +77,7 @@
 .post-content{
     border-left: 5px solid #B9B9B9;
     padding-left: 15px;
+    overflow-x:scroll;
 }
 
 .avatar img{

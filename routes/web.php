@@ -30,6 +30,7 @@ Route::post('/profile/change/avatar','ProfileController@changeAvatar');
 Route::get('/blog/entry/{postid}','PostController@viewPost');
 
 Route::get('/learn/archive','LearnController@archived');
+Route::get('/learn/lectures','LearnController@lectures');
 
 Route::get('/ranking','RankingController@index');
 
@@ -47,3 +48,5 @@ Route::get('/admin/dashboard/problem/{problemid}/delete','AdminController@delete
 Route::get('/admin/dashboard/announcement','AdminController@announcement');
 Route::post('/admin/dashboard/contest/new','AdminController@createcontest');
 Route::post('/admin/dashboard/announcement/new','AdminController@createannouncement');
+Route::get('/admin/dashboard/blog','AdminController@blog');
+Route::get('/admin/dashboard/lecture','AdminController@lecture');

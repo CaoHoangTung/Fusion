@@ -184,7 +184,7 @@
     </div>
 </body>
 
-<script src="{{ asset('js/getCustomData.js') }}"></script>
+<script src="/js/getCustomData.js"></script>
 <script>
     getUpcomingContests();
     getTopUsers();

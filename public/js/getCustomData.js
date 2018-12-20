@@ -153,9 +153,32 @@ function getTopUsers(){
             var str = "";
             for (var index in users){
                 var user = users[index];
-                str += "<span class='topuser'><a href='/profile/"+user.id+"' >"+user.name+"</a></span> | <span>"+user.Rating+"</span><br>";
+                str += "<div class='utop'>"
+                str += "<span class='topuser'><a class='uname' v='"+user.Rating+"' href='/profile/"+user.id+"' >"+user.name+"</a></span> | <span class='upoint'>"+user.Rating+"</span><br>";
+                str += "</div>"
             }
             $('.card-topusers').html(str);
+            $('.uname').each(function(){
+                var upoint = $(this).attr('v');
+                console.log(upoint);
+                var color;
+                if (upoint > 2000){
+                    color = "red";
+                } 
+                else if (upoint > 1500){
+                    color = "orange";
+                }
+                else if (upoint > 1000){
+                    color = "purple";
+                }
+                else if (upoint > 500){
+                    color = "green";
+                }
+                else{
+                    color = "grey";
+                }
+                $(this).css('color',color);
+            });
         },
         error: function(res){
             // $('.card-upcomingcontest').html("");
@@ -242,3 +265,25 @@ function getContestsHistory(){
         }
     });
 }
+
+
+$('.uname').each(function(){
+    var upoint = $(this).attr('v');
+    var color;
+    if (upoint > 2000){
+        color = "red";
+    } 
+    else if (upoint > 1500){
+        color = "orange";
+    }
+    else if (upoint > 1000){
+        color = "purple";
+    }
+    else if (upoint > 500){
+        color = "green";
+    }
+    else{
+        color = "grey";
+    }
+    $(this).css('color',color);
+});

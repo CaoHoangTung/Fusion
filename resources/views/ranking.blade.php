@@ -34,7 +34,7 @@
                                                             {{$key+1}}
                                                         @endif
                                                         </th>
-                                                        <td><a href="/profile/{{$user->id}}">{{$user->name}}</a></td>
+                                                        <td><a href="/profile/{{$user->id}}" class="uname" v='{{$user->Rating}}'>{{$user->name}}</a></td>
                                                         <td>{{$user->Rating}}</td>
                                                     </tr>
                                                 @endforeach

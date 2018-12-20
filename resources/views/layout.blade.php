@@ -154,7 +154,7 @@
                                     </div>
                                     <div class="info">
                                         <div class="title">
-                                            <a target="_blank" href="/profile/{{$profile->id}}">{{$profile->name}}</a>
+                                            <a target="_blank" href="/profile/{{$profile->id}}" class="uname" v='{{$profile->Rating}}'>{{$profile->name}}</a>
                                         </div>
                                         <div class="desc">{{$profile->Rating}}</div>
                                     </div>

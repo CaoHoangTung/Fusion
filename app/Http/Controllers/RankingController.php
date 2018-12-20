@@ -25,7 +25,10 @@ class RankingController extends Controller{
         $users = DB::table('users')->orderBy('Rating','desc')->Paginate(self::$resultPerPage);
         $arr['users'] = $users;
 
-        $halloffame = DB::table('halloffame')->orderBy('halloffame.ContestID','desc')->join('contests','halloffame.ContestID','=','contests.ContestID')->Paginate(self::$resultPerPage);
+        $halloffame = DB::table('halloffame')
+                    ->orderBy('halloffame.ContestID','desc')
+                    ->join('contests','halloffame.ContestID','=','contests.ContestID')
+                    ->Paginate(self::$resultPerPage);
         $arr['hof'] = $halloffame;
         return view('ranking',$arr);
     }

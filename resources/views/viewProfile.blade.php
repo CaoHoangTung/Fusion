@@ -17,7 +17,7 @@
 <div class="card-body">
     <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">{{$profile->name}}</h3>
+                <h3 class="panel-title uname" v='{{$profile->Rating}}'>{{$profile->name}}</h3>
             </div>
             <div class="panel-body">
               <div class="row">

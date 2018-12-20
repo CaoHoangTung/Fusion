@@ -44,8 +44,6 @@ function secondsToHIS(seconds){
 }
 
 function getUpcomingContests(){
-    var x = [null,null];
-    var Ind = [null,null];
     $.ajax({
         url: '/api/home/nextcontests',
         method: 'get',
@@ -54,13 +52,11 @@ function getUpcomingContests(){
             var contest0 = contests[0];
             var contest1 = contests[1];
             var str = "";
-            str += "<a href='/contests/"+contest0.ContestID+"' >"+contest0.ContestName+"</a><br>";
-            str += "<span id='timer"+0+"'></span><br><br>";
-            str += "<input type='hidden' id='tinput"+0+"' value='"+contest0.TimeLeft+"'>";
-            str += "<a href='/contests/"+contest1.ContestID+"' >"+contest1.ContestName+"</a><br>";
-            str += "<span id='timer"+1+"'></span><br><br>";
-            str += "<input type='hidden' id='tinput"+1+"' value='"+contest1.TimeLeft+"'>";
-            
+            if (contest0 != null){
+                str += "<a href='/contests/"+contest0.ContestID+"' >"+contest0.ContestName+"</a><br>";
+                str += "<span id='timer"+0+"'></span><br><br>";
+                str += "<input type='hidden' id='tinput"+0+"' value='"+contest0.TimeLeft+"'>";
+
                 var distance0 = contest0.TimeLeft*1000;
                 var x0 = setInterval(function() {    
 
@@ -80,6 +76,11 @@ function getUpcomingContests(){
                         document.getElementById("timer0").innerHTML = "The contest has begun";
                     }
                 }, 1000);
+            }
+            if (contest1 != null){
+                str += "<a href='/contests/"+contest1.ContestID+"' >"+contest1.ContestName+"</a><br>";
+                str += "<span id='timer"+1+"'></span><br><br>";
+                str += "<input type='hidden' id='tinput"+1+"' value='"+contest1.TimeLeft+"'>";
 
                 var distance1 = contest1.TimeLeft*1000;
                 var x1 = setInterval(function() {    
@@ -100,6 +101,8 @@ function getUpcomingContests(){
                         document.getElementById("timer1").innerHTML = "The contest has begun";
                     }
                 }, 1000);
+            }
+                
             // for (var index in contests){
             //     var contest = contests[index];
             //     str += "<a href='/contests/"+contest.ContestID+"' >"+contest.ContestName+"</a><br>";

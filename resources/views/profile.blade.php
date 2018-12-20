@@ -68,14 +68,14 @@
                     <div class="solved-problems">
                         <h3>Solved Problems</h3>
                         @foreach($profile->solvedProblems as $key=>$problem)
-                        <span><a href="/problems/{{$problem->ProblemID}}">{{$problem->QuestionName}}</a></span>
+                        <span><a href="/contests/{{$problem->ContestID}}/{{$problem->ProblemID}}">{{$problem->QuestionName}}</a></span>
                         @endforeach
                     </div>
                     <hr>
                     <div class="unsolved-problems">
                         <h3>Unsolved Problems</h3>
                         @foreach($profile->unsolvedProblems as $key=>$problem)
-                        <span><a href="/problems/{{$problem->ProblemID}}">{{$problem->QuestionName}}</a></span>
+                        <span><a href="/contests/{{$problem->ContestID}}/{{$problem->ProblemID}}">{{$problem->QuestionName}}</a></span>
                         @endforeach
                     </div>
                 </div>

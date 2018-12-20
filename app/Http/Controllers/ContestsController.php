@@ -62,6 +62,9 @@ class ContestsController extends Controller{
         $arr['contest'] = $contest;
 
         $now = date('Y-m-d H:i:s');
+        $arr['Countdown'] = max(0,strtotime($contest->ContestEnd) - strtotime($now));
+
+        $now = date('Y-m-d H:i:s');
         if ($now < $contest->ContestBegin){
             $arr['ContestBegin'] = $contest->ContestBegin;
             $arr['TimeLeft'] = strtotime($contest->ContestBegin)-strtotime($now);

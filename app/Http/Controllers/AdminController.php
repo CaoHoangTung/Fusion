@@ -13,7 +13,18 @@ class AdminController extends Controller{
     }
 
     public function index(){
-        return view('admin.index');
+        $arr = array();
+        $userCount = DB::table('users')->count();
+        $contestCount = DB::table('contests')->count();
+        $problemCount = DB::table('problems')->count();
+        $subCount = DB::table('submissions')->count();
+        
+        $arr['userCount'] = $userCount;
+        $arr['contestCount'] = $contestCount;
+        $arr['problemCount'] = $problemCount;
+        $arr['subCount'] = $subCount;
+
+        return view('admin.index',$arr);
     }
 
     public function newcontest(){
@@ -106,22 +117,91 @@ class AdminController extends Controller{
         return view('admin.problems',$arr);
     }
 
-    public function createannouncement(Request $req){
-        if(DB::table('posts')->insert(['Header'=>$req['Header'],'Content'=>$req['Content'],
-                                        'Creator'=>Auth::user()->id,'Type'=>'announcement']));
-            return redirect()->back()->with('success', 'Announcement created successfully');
-        return redirect()->back()->with('error', 'Error creating new announcement');
-    }
-
-    public function announcement(){
-        return view('admin.announcement');
-    }
+    // public function createannouncement(Request $req){
+    //     if(DB::table('posts')->insert(['Header'=>$req['Header'],'Content'=>$req['Content'],
+    //                                     'Creator'=>Auth::user()->id,'Type'=>'announcement']));
+    //         return redirect()->back()->with('success', 'Announcement created successfully');
+    //     return redirect()->back()->with('error', 'Error creating new announcement');
+    // }
 
     public function blog(){
-        return view('admin.blog');
+        $resultPerPage = 20;
+        $arr = array();
+        
+        $blogs = DB::table('posts')->where('Type','post')->Paginate($resultPerPage);
+        $arr['posts'] = $blogs;
+
+        return view('admin.blog',$arr);
+    }
+
+    public function  createBlog(Request $req){
+        $Header = $req->Header;
+        $Content = $req->Content;
+        $Creator = Auth::user()->id;
+
+        if (DB::table('posts')->insert(['Header'=>$Header,'Content'=>$Content,'Creator'=>$Creator,'Type','post']))
+            return redirect()->back()->with('success','Blog added');
+        return redirect()->back()->with('error','Error creating new blog');
+    }
+
+    public function changeBlog(Request $req, $PostID){
+        $Header = $req->Header;
+        $Content = $req->Content;
+
+        if (DB::table('posts')->where('PostID',$PostID)->update(['Header'=>$Header,'Content'=>$Content]))
+            return redirect()->back()->with('success','Post updated');
+        return redirect()->back()->with('error','Error updating post'); 
+    }
+
+    public function deleteBlog(Request $req, $PostID){
+        if (DB::table('posts')->where('PostID',$PostID)->delete())
+            return redirect()->back()->with('success','Post deleted');
+        return redirect()->back()->with('error','Error deleting post');
+    }
+
+    public function getBlog(Request $req, $PostID){
+        $post =  DB::table('posts')->where('PostID','=',$PostID)->get()->toArray();
+        return json_encode($post[0]);
     }
 
     public function lecture(){
-        return view('admin.lecture');
+        $resultPerPage = 20;
+        $arr = array();
+        
+        $lectures = DB::table('posts')->where('Type','lecture')->Paginate($resultPerPage);
+        $arr['posts'] = $lectures;
+
+        return view('admin.lecture',$arr);
     }
+
+    public function  createLecture(Request $req){
+        $Header = $req->Header;
+        $Content = $req->Content;
+        $Creator = Auth::user()->id;
+
+        if (DB::table('posts')->insert(['Header'=>$Header,'Content'=>$Content,'Creator'=>$Creator,'Type'=>'lecture']))
+            return redirect()->back()->with('success','Lecture added');
+        return redirect()->back()->with('error','Error creating new lecture');
+    }
+
+    public function announcement(){
+        $resultPerPage = 20;
+        $arr = array();
+        
+        $announcements = DB::table('posts')->where('Type','announcement')->Paginate($resultPerPage);
+        $arr['posts'] = $announcements;
+
+        return view('admin.announcement',$arr);
+    }
+
+    public function createAnnouncement(Request $req){
+        $Header = $req->Header;
+        $Content = $req->Content;
+        $Creator = Auth::user()->id;
+
+        if (DB::table('posts')->insert(['Header'=>$Header,'Content'=>$Content,'Creator'=>$Creator,'Type'=>'announcement']))
+            return redirect()->back()->with('success','Announcement added');
+        return redirect()->back()->with('error','Error creating new announcement');
+    }
+
 }

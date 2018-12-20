@@ -55,7 +55,7 @@ class HomeController extends Controller
 
     public function posts(){
         $take = 10;
-        $posts = DB::table('posts')->join('users','posts.Creator','=','users.id')->orderBy('CreateDate','desc')->take($take)->get();
+        $posts = DB::table('posts')->where('Type','announcement')->join('users','posts.Creator','=','users.id')->orderBy('CreateDate','desc')->take($take)->get();
         
         return json_encode($posts);
     }

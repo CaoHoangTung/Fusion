@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\HomeController;
 
 class ProfileController extends Controller{
@@ -118,5 +119,35 @@ class ProfileController extends Controller{
 // return var_dump($user->solvedProblems);
 
         return view('viewProfile',$arr);
+    }
+
+    public function settings(){
+        $arr = array();
+        
+        $user = HomeController::getuserprofile()[0];
+        $arr['profile'] = $user;
+
+        return view('settings',$arr);
+    }
+
+    public function changePassword(Request $req){
+        $oldPwd = $req->oldpassword;        
+        $true = Auth::user()->password;
+
+        $pwdMatch = Hash::check($oldPwd,$true);
+        if (!$pwdMatch)
+            return redirect()->back()->with('error','Your old password is incorrect');
+
+        $newPwd = $req->newpassword;
+        if ($newPwd === $oldPwd)
+            return redirect()->back()->with('error','New password must be different from old password');
+        
+        if (strlen($newPwd) < 8)
+            return redirect()->back()->with('error','Password must have 8 or more characters');
+
+        $UserID = Auth::user()->id;
+        $newPwd = Hash::make($newPwd);
+        DB::table('users')->where('id',$UserID)->update(['password'=>$newPwd]);
+        return redirect()->back()->with('success','Password changed');
     }
 }

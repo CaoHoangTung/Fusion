@@ -27,6 +27,9 @@ Route::get('/profile','ProfileController@index');
 Route::get('/profile/{UserID}','ProfileController@viewProfile');
 Route::post('/profile/change/avatar','ProfileController@changeAvatar');
 
+Route::get('/settings','ProfileController@settings');
+Route::post('/settings/change/password','ProfileController@changePassword');
+
 Route::get('/blog/entry/{postid}','PostController@viewPost');
 
 Route::get('/learn/archive','LearnController@archived');
@@ -45,8 +48,18 @@ Route::get('/sadmin/dashboard/contest/{contestid}/detail','AdminController@viewP
 Route::post('/sadmin/dashboard/problem/new','AdminController@addProblem');
 Route::post('/sadmin/dashboard/problem/{problemid}/change','AdminController@changeProblem');
 Route::get('/sadmin/dashboard/problem/{problemid}/delete','AdminController@deleteProblem');
-Route::get('/sadmin/dashboard/announcement','AdminController@announcement');
+// Route::get('/sadmin/dashboard/announcement','AdminController@announcement');
 Route::post('/sadmin/dashboard/contest/new','AdminController@createcontest');
-Route::post('/sadmin/dashboard/announcement/new','AdminController@createannouncement');
+// Route::post('/sadmin/dashboard/announcement/new','AdminController@createannouncement');
+
 Route::get('/sadmin/dashboard/blog','AdminController@blog');
+Route::post('/sadmin/dashboard/blog/new','AdminController@createBlog');
+Route::post('/sadmin/dashboard/blog/{blogid}/change','AdminController@changeBlog');
+Route::get('/sadmin/dashboard/blog/{blogid}/delete','AdminController@deleteBlog');
+Route::get('/sadmin/dashboard/blog/entry/{blogid}','AdminController@getBlog');
+
 Route::get('/sadmin/dashboard/lecture','AdminController@lecture');
+Route::post('/sadmin/dashboard/lecture/new','AdminController@createLecture');
+
+Route::get('/sadmin/dashboard/announcement','AdminController@announcement');
+Route::post('/sadmin/dashboard/announcement/new','AdminController@createAnnouncement');

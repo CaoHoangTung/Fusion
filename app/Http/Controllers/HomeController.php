@@ -28,7 +28,7 @@ class HomeController extends Controller
         $arr = array();
 
         $user = self::getuserprofile()[0];
-        if (isset($user->Avatar)){
+        if (isset($user->id)){
             if ($user->Avatar == null)
                 $user->Avatar = "/images/avatar.png";
 

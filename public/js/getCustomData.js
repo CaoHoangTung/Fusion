@@ -267,24 +267,25 @@ function getContestsHistory(){
 }
 
 $(document).ready(function(){
-    $('.uname').each(function(){
-        var upoint = $(this).attr('v');
-        var color;
-        if (upoint > 2000){
-            color = "red";
-        } 
-        else if (upoint > 1500){
-            color = "orange";
-        }
-        else if (upoint > 1000){
-            color = "purple";
-        }
-        else if (upoint > 500){
-            color = "green";
-        }
-        else{
-            color = "grey";
-        }
-        $(this).css('color',color);
-    });
+    if ($('.uname').length > 0)
+        $('.uname').each(function(){
+            var upoint = $(this).attr('v');
+            var color;
+            if (upoint > 2000){
+                color = "red";
+            } 
+            else if (upoint > 1500){
+                color = "orange";
+            }
+            else if (upoint > 1000){
+                color = "purple";
+            }
+            else if (upoint > 500){
+                color = "green";
+            }
+            else{
+                color = "grey";
+            }
+            $(this).css('color',color);
+        });
 });

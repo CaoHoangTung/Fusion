@@ -158,25 +158,27 @@ function getTopUsers(){
                 str += "</div>"
             }
             $('.card-topusers').html(str);
-            $('.uname').each(function(){
-                var upoint = $(this).attr('v');
-                var color;
-                if (upoint > 2000){
-                    color = "red";
-                } 
-                else if (upoint > 1500){
-                    color = "orange";
-                }
-                else if (upoint > 1000){
-                    color = "purple";
-                }
-                else if (upoint > 500){
-                    color = "green";
-                }
-                else{
-                    color = "grey";
-                }
-                $(this).css('color',color);
+            $('.card-topuser').ready(function(){
+                $('.uname').each(function(){
+                    var upoint = $(this).attr('v');
+                    var color;
+                    if (upoint > 2000){
+                        color = "red";
+                    } 
+                    else if (upoint > 1500){
+                        color = "orange";
+                    }
+                    else if (upoint > 1000){
+                        color = "purple";
+                    }
+                    else if (upoint > 500){
+                        color = "green";
+                    }
+                    else{
+                        color = "grey";
+                    }
+                    $(this).css('color',color);
+                });
             });
         },
         error: function(res){
@@ -264,24 +266,25 @@ function getContestsHistory(){
     });
 }
 
-
-$('.uname').each(function(){
-    var upoint = $(this).attr('v');
-    var color;
-    if (upoint > 2000){
-        color = "red";
-    } 
-    else if (upoint > 1500){
-        color = "orange";
-    }
-    else if (upoint > 1000){
-        color = "purple";
-    }
-    else if (upoint > 500){
-        color = "green";
-    }
-    else{
-        color = "grey";
-    }
-    $(this).css('color',color);
+$(document).ready(function(){
+    $('.uname').each(function(){
+        var upoint = $(this).attr('v');
+        var color;
+        if (upoint > 2000){
+            color = "red";
+        } 
+        else if (upoint > 1500){
+            color = "orange";
+        }
+        else if (upoint > 1000){
+            color = "purple";
+        }
+        else if (upoint > 500){
+            color = "green";
+        }
+        else{
+            color = "grey";
+        }
+        $(this).css('color',color);
+    });
 });

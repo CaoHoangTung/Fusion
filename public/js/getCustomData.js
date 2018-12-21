@@ -160,7 +160,6 @@ function getTopUsers(){
             $('.card-topusers').html(str);
             $('.uname').each(function(){
                 var upoint = $(this).attr('v');
-                console.log(upoint);
                 var color;
                 if (upoint > 2000){
                     color = "red";
@@ -223,8 +222,7 @@ function getAllUpcomingContests(){
                 var contestBegin =new Date(contest.ContestBegin);
                 var contestEnd = new Date(contest.ContestEnd);
                 var diff = secondsToHIS((contestEnd-contestBegin)/1000);
-                
-                console.log(diff);
+
                 str += "<tr>"
                     +   "<th scope='row'><a href='/contests/"+contest.ContestID+"'>"+contest.ContestName+"</a></th>"
                     +   "<td>"+contest.name+"</td>"

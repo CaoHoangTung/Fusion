@@ -17,7 +17,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                            @foreach($contests_on as $key=>$contest)
+                                                <tr>
+                                                    <th scope='row'><a href='/contests/{{$contest->ContestID}}'>{{$contest->ContestName}}</a></th>
+                                                    <td>{{$contest->name}}</td>
+                                                    <td class="contestDuration" v="{{strtotime($contest->ContestEnd)-strtotime($contest->ContestBegin)}}"></td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -34,9 +40,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
+                                            @foreach($contests_on as $key=>$contest)
+                                                <tr>
+                                                    <th scope='row'><a href='/contests/{{$contest->ContestID}}'>{{$contest->ContestName}}</a></th>
+                                                    <td>{{$contest->name}}</td>
+                                                    <td class="contestDuration" v="{{strtotime($contest->ContestEnd)-strtotime($contest->ContestBegin)}}"></td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
+                                    {{$contests_old->links()}}
                                 </div>
                             </div>
                             <hr>
@@ -45,7 +58,15 @@
 
 @section('scripts')
 <script>
-    getAllUpcomingContests();
+    // getAllUpcomingContests();
+    $(document).ready(function(){
+        $('.contestDuration').each(function(){
+            var diff = $(this).attr('v');
+            var duration = secondsToHIS(diff);
+            console.log(duration);
+            $(this).html(duration);
+        });
+    });
     getContestsHistory();
 </script>
 @endsection

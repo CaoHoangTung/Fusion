@@ -25,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $resultPerPage = 10;
         $arr = array();
 
         $user = self::getuserprofile()[0];
@@ -34,6 +35,9 @@ class HomeController extends Controller
 
             $arr['profile'] = $user;
         }
+
+        $announcements = DB::table('posts')->where('Type','announcement')->join('users','posts.Creator','=','users.id')->orderBy('CreateDate','desc')->Paginate($resultPerPage);
+        $arr['posts'] = $announcements;
         return view('home',$arr);
     }
 

@@ -14,13 +14,19 @@ class ContestsController extends Controller{
     }
 
     public function index(){
+        $resultPerPage = 20;
+
         $user = HomeController::getuserprofile();
         $arr = array();
         $arr['profile'] = $user[0];
+
+        $now = date('Y-m-d H:i:s');
+        $arr['contests_on'] = DB::table('contests')->where([['ContestEnd','>',$now]])->join('users','users.id','=','contests.Creator')->get()->toArray();
+        $arr['contests_old'] = DB::table('contests')->where([['ContestEnd','<',$now]])->join('users','users.id','=','contests.Creator')->Paginate($resultPerPage);
         return view('contests',$arr);
     }
 
-    public function upcoming(){
+    static public function upcoming(){
         $from = 0;
         $limit = 15;
         $now = date('Y-m-d H:i:s');

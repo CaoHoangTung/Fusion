@@ -40,7 +40,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($contests_on as $key=>$contest)
+                                            @foreach($contests_old as $key=>$contest)
                                                 <tr>
                                                     <th scope='row'><a href='/contests/{{$contest->ContestID}}'>{{$contest->ContestName}}</a></th>
                                                     <td>{{$contest->name}}</td>

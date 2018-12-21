@@ -67,6 +67,6 @@
             $(this).html(duration);
         });
     });
-    getContestsHistory();
+    // getContestsHistory();
 </script>
 @endsection

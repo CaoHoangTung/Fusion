@@ -116,7 +116,10 @@
         <!-- wrapper  -->
         <!-- ============================================================== -->
         <div class="dashboard-wrapper">
-            
+            <div id="global-clock" style="margin-top: 10vh; margin-left: 50px; font-weight: bold; font-size: 20px">
+
+            </div>
+ 
             @yield('content')
 
             <!-- ============================================================== -->
@@ -166,5 +169,22 @@
 
     @yield('scripts')
 </body>
- 
+
+<script>
+    setInterval(function(){
+        $.ajax({
+            url: '/sadmin/dashboard/time',
+            method: 'get',
+
+            success: function(res){
+                $('#global-clock').html("Server time: "+res);
+            },
+            error: function(res){
+                $('#global-clock').html("Error fetching time");
+                console.log(res);
+            }
+        })
+    },1000);
+</script>
+
 </html>

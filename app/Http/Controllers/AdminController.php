@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class AdminController extends Controller{
 
     public function __construct(){
-        $this->middleware(['admin']);
+        $this->middleware('admin',['except'=>['NOW']]);
     }
 
     public function index(){
@@ -204,4 +204,8 @@ class AdminController extends Controller{
         return redirect()->back()->with('error','Error creating new announcement');
     }
 
+    public function NOW(){
+        $now = date('Y-m-d H:i:s');
+        return $now;
+    }
 }

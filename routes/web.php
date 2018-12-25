@@ -51,6 +51,7 @@ Route::get('/sadmin/dashboard/problem/{problemid}/delete','AdminController@delet
 // Route::get('/sadmin/dashboard/announcement','AdminController@announcement');
 Route::post('/sadmin/dashboard/contest/new','AdminController@createcontest');
 // Route::post('/sadmin/dashboard/announcement/new','AdminController@createannouncement');
+Route::get('/sadmin/dashboard/time','TimeController@NOW');
 
 Route::get('/sadmin/dashboard/blog','AdminController@blog');
 Route::post('/sadmin/dashboard/blog/new','AdminController@createBlog');

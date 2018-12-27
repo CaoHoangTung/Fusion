@@ -7,7 +7,7 @@
 <div class="tab-regular">
                                 <ul class="nav nav-tabs nav-fill" id="myTab7" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active show" id="home-tab-justify" data-toggle="tab" href="#home-justify" role="tab" aria-controls="home" aria-selected="true">Global Ranking</a>
+                                        <a class="nav-link active show" id="home-tab-justify" data-toggle="tab" href="#home-justify" role="tab" aria-controls="home" aria-selected="true">Rating</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="profile-tab-justify" data-toggle="tab" href="#profile-justify" role="tab" aria-controls="profile" aria-selected="false">Hall Of Fame</a>

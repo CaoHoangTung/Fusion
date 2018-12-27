@@ -13,7 +13,6 @@
                                                 <th scope="col">Contest</th>
                                                 <th scope="col">Creator</th>
                                                 <th scope="col">Duration</th>
-                                            
                                             </tr>
                                         </thead>
                                         <tbody>

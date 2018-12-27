@@ -5,7 +5,7 @@
 
 <div class="card-body">
     <div class="card">
-                                <h5 class="card-header">Current and upcoming contests</h5>
+                                <h5 class="card-header">Present and future contests</h5>
                                 <div class="card-body">
                                     <table class="table table-striped" id="upcomingContests">
                                         <thead>
@@ -30,7 +30,7 @@
                             </div>
                             <hr>
                             <div class="card">
-                                <h5 class="card-header">History</h5>
+                                <h5 class="card-header">Past contests</h5>
                                 <div class="card-body">
                                     <table class="table table-striped" id="contestHistory">
                                         <thead>

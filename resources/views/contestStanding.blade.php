@@ -10,29 +10,50 @@
         <!-- <h5 class="card-header">Problems</h5> -->
                                 <ul class="nav nav-tabs nav-fill" id="myTab7" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active show" aria-selected="true">Problems</a>
+                                        <a class="nav-link" href="/contests/{{$contest->ContestID}}" role="tab" aria-controls="profile" aria-selected="false">Problems</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/ranking/contests/{{$contest->ContestID}}" role="tab" aria-controls="profile" aria-selected="false">Standings</a>
+                                        <a class="nav-link active show" aria-selected="true">Standings</a>
                                     </li>
                                 </ul>
         <div class="table-responsive">
+                        @if (sizeof($ranks) > 0)
                                         <table class="table table-striped table-bordered first">
                                             <thead>
                                                 <tr>
-                                                    <th>Problem ID</th>
-                                                    <th>Question name</th>
+                                                    <th>#</th>
+                                                    <th>User</th>
+                                                    @foreach(current($ranks)->solved as $key=>$value)
+                                                        <th>{{$key}}</th>
+                                                    @endforeach
+                                                    <th>Points</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($problems as $key=>$problem)
-                                                <tr id="tr-{{$problem->ProblemID}}" class= @if(isset($problem->status)) "problem-done" @endif>
-                                                    <td><a href="/contests/{{$contest->ContestID}}/{{$problem->ProblemID}}">{{$problem->ProblemID}}</a></td>
-                                                    <td><a href="/contests/{{$contest->ContestID}}/{{$problem->ProblemID}}">{{$problem->QuestionName}}</a></td>
+                                                @php $count = 0 @endphp
+                                                @foreach($ranks as $key=>$user)
+                                                @php $count++ @endphp
+                                                <tr class= @if(isset($problem->status)) "problem-done" @endif>
+                                                    <td>{{$count}}</td>
+                                                    <td><a href="/profile/{{$key}}" class="uname" v='{{$user->rating}}'>{{$user->username}}</a></td>
+                                                    @foreach($user->solved as $key=>$value)
+                                                        <td @if ($value > 0) 
+                                                                style="background: green; color: white"
+                                                            @endif
+                                                            @if($value < 0)
+                                                            style="background: red; color: white"
+                                                            @endif
+                                                        >
+                                                            {{$value}}</td>
+                                                    @endforeach
+                                                    <td>{{$user->point}}</td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
+                        @else
+                            <h5>No submissions has been made yet</h5>
+                        @endif
                                     </div>
         <hr>
     </div>

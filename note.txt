@@ -1,0 +1,4 @@
+Add Full Name
+Participated contest
+Current standings each contest
+

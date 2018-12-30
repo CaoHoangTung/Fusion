@@ -66,9 +66,9 @@
                                                             @endif
                                                             </th>
                                                             <td><a href="/contests/{{$record->ContestID}}">{{$record->ContestName}}</a></td>
-                                                            <td><img src="/images/firstplace.svg" class='prize-icon'><a href="/profile/{{$record->First}}">{{$record->FirstName}}</a></td>
-                                                            <td><img src="/images/secondplace.svg" class='prize-icon'><a href="/profile/{{$record->Second}}">{{$record->SecondName}}</a></td>
-                                                            <td><img src="/images/thirdplace.svg" class='prize-icon'><a href="/profile/{{$record->Third}}">{{$record->ThirdName}}</a></td>
+                                                            <td><img src="/images/firstplace.png" class='prize-icon'><a href="/profile/{{$record->First}}">{{$record->FirstName}}</a></td>
+                                                            <td><img src="/images/secondplace.png" class='prize-icon'><a href="/profile/{{$record->Second}}">{{$record->SecondName}}</a></td>
+                                                            <td><img src="/images/thirdplace.png" class='prize-icon'><a href="/profile/{{$record->Third}}">{{$record->ThirdName}}</a></td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>

@@ -187,7 +187,6 @@
 
 <script src="/js/getCustomData.js"></script>
 <script>
-    
     getUpcomingContests();
     getTopUsers();
 </script>

@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\HomeController;
 
+class UserStanding{
+    public $solved = array();
+    public $point = 0;
+    public $rating = 0;
+    public $username = "unknown";
+}
+
 class ContestsController extends Controller{
 
     public function __construct(){
@@ -95,6 +102,96 @@ class ContestsController extends Controller{
 
             return view('viewcontest',$arr);
         }
+    }
+
+    public function contestStanding(Request $req, $ContestID){
+
+        $arr = array();
+        $contest = array();
+
+        $user = HomeController::getuserprofile();
+        $arr['profile'] = $user[0];
+
+        $contest = DB::table('contests')->where('ContestID','=',$ContestID)->get()->first();
+        $arr['contest'] = $contest;
+
+        $now = date('Y-m-d H:i:s');
+        $arr['Countdown'] = max(0,strtotime($contest->ContestEnd) - strtotime($now));
+
+        $now = date('Y-m-d H:i:s');
+        if ($now < $contest->ContestBegin){
+            $arr['ContestBegin'] = $contest->ContestBegin;
+            $arr['TimeLeft'] = strtotime($contest->ContestBegin)-strtotime($now);
+            // return $now." <br>".$contest->ContestBegin." <Br>".$arr['TimeLeft'];
+            return view('contestnotopen',$arr);
+        }
+
+        if (!isset($contest)){
+            return redirect('404');
+        }
+
+        $totalUser = DB::table('submissions')->where([['ContestID',$ContestID]])->groupBy('UID')->get()->count();
+        $maxPointEachProblem = $totalUser+1;
+        
+        $problems = DB::table('problems')->where('ContestID',$ContestID)->get()->toArray();
+        $problemPool = array();
+
+        foreach($problems as $key=>$problem){
+            $problemPool[$problem->ProblemID] = 0;
+        }
+        
+        $users = DB::table('submissions')
+                ->where('ContestID',$ContestID)
+                ->join('users','users.id','=','submissions.UID')
+                ->groupBy('UID')
+                ->distinct()
+                ->get()
+                ->toArray();
+        $userPool = array();
+        
+        if (!isset($users)){ 
+            $arr['msg'] = "There are no submissions yet";
+            return view('contestStanding',$arr);
+        }
+
+        foreach($users as $key=>$user){
+            $userPool[$user->UID] = new UserStanding;
+            $userPool[$user->UID]->username = $user->name;
+            $userPool[$user->UID]->rating = $user->Rating;
+            foreach($problems as $key=>$problem){
+                $userPool[$user->UID]->solved[$problem->QuestionName] = 0;
+            }
+        }
+        
+        $Submissions = DB::table('submissions')
+                    ->where([['submissions.SubmitAt','<',$contest->ContestEnd],['submissions.ContestID',$ContestID]])
+                    ->orderBy('submissions.SubmitAt')->groupBy('submissions.ProblemID','submissions.UID')
+                    ->join('users','users.id','=','submissions.UID')
+                    ->join('problems','problems.ProblemID','=','submissions.ProblemID')
+                    ->get()
+                    ->toArray();
+        
+        if (!isset($users)){ 
+            $arr['msg'] = "There are no submissions yet";
+            return view('contestStanding',$arr);
+        }
+
+        foreach($Submissions as $key=>$submission)
+            if ($submission->Status){
+                $pointGained = ($maxPointEachProblem - $problemPool[$submission->ProblemID]);
+                $problemPool[$submission->ProblemID]++;
+
+                $userPool[$submission->UID]->point += $pointGained;
+                $userPool[$submission->UID]->solved[$submission->QuestionName] = $pointGained;
+            }
+            else if ($userPool[$submission->UID]->solved[$submission->QuestionName] <= 0){
+                $userPool[$submission->UID]->solved[$submission->QuestionName]--;
+            }
+
+        arsort($userPool);
+        $arr['ranks'] = $userPool;
+        return view('contestStanding',$arr);
+        return var_dump(current($userPool)->solved);
     }
 
     public function viewProblem($ContestID = null,$ProblemID){

@@ -20,6 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/contests','ContestsController@index')->name('contests');
 Route::get('/contests/{contestid}','ContestsController@viewContest')->name('viewContest');
 Route::get('/contests/{contestid}/{problemid}','ContestsController@viewProblem')->name('viewProblem');
+Route::get('/ranking/contests/{contestid}','ContestsController@contestStanding');
 Route::post('/submit/{contestid}/{problemid}','ContestsController@submit');
 Route::post('/judge','RatingController@rateContest');
 

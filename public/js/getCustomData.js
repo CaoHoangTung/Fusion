@@ -154,7 +154,7 @@ function getTopUsers(){
             for (var index in users){
                 var user = users[index];
                 str += "<div class='utop'>"
-                str += "<span class='topuser'><a class='uname' v='"+user.Rating+"' href='/profile/"+user.id+"' >"+user.name+"</a></span> | <span class='upoint'>"+user.Rating+"</span><br>";
+                str += "<span class='topuser'><a class='uname' v='"+user.Rating+"' href='/profile/"+user.id+"' >"+user.name+"</a></span><span class='upoint'>"+user.Rating+"</span><br>";
                 str += "</div>"
             }
             $('.card-topusers').html(str);

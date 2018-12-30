@@ -61,6 +61,15 @@
     font-size: 18px;
 }
 
+.utop .uname{
+    float: left;
+}
+.utop .upoint{
+    float: right;
+    padding-left: 25%;
+    border-left: 1px solid grey;
+}
+
 .post{
     margin-bottom: 30px;
     border-bottom: 1px solid #B9B9B9

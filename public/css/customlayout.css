@@ -71,7 +71,7 @@
 .utop .upoint{
     float: right;
     padding-left: 10%;
-    border-left: 1px solid grey;
+    /* border-left: 1px solid grey; */
 }
 
 .post{

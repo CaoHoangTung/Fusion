@@ -61,6 +61,10 @@
     font-size: 18px;
 }
 
+.utop{
+    font-size: 94% !important
+}
+
 .utop .uname{
     float: left;
 }

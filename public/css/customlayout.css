@@ -62,7 +62,7 @@
 }
 
 .utop{
-    font-size: 94% !important
+    font-size: 87% !important
 }
 
 .utop .uname{
@@ -70,7 +70,7 @@
 }
 .utop .upoint{
     float: right;
-    padding-left: 15%;
+    padding-left: 10%;
     border-left: 1px solid grey;
 }
 

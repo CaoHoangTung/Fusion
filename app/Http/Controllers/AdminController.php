@@ -30,7 +30,8 @@ class AdminController extends Controller{
     public function newcontest(){
         $arr = array();
         $newid = DB::table('contests')->orderBy('ContestID','desc')->get()->first();
-        if (property_exists($newid,'ContestID'))
+
+        if (sizeof(DB::table('contests')->orderBy('ContestID','desc')->get()) > 0)
             $arr['newid'] = $newid->ContestID+1;
         else
             $arr['newid'] = 1;
